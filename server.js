@@ -17,16 +17,21 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("Database connected");
 });
+const bodyParser = require("body-parser");
 
 const indexRouter = require("./routes/index.js");
+const authorRouter = require("./routes/authors.js");
 
 app.set("view engine", "ejs");
+
 app.set("views", __dirname + "/views");
 app.set("layout", __dirname + "/views/" + "layouts/layout.ejs");
 app.use(expressLayouts);
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({ extended: false, limit: "10mb" }));
 
 app.use("/", indexRouter);
+app.use("/authors", authorRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server listening on port ${process.env.PORT || 3000}`);

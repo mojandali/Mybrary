@@ -7,11 +7,8 @@
     <title>Mybraby</title>
   </head>
   <body>
-    Before
-    <BR />
-    <%- body %>
-    <BR />
-    After
+    <%-include('../partials/header.ejs') %>
+    <%-include('../partials/errorMessage.ejs') %> <%-body %>
     <BR />
   </body>
 </html>
