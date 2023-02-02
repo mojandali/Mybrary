@@ -17,10 +17,12 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("Database connected");
 });
+
 const bodyParser = require("body-parser");
 
 const indexRouter = require("./routes/index.js");
 const authorRouter = require("./routes/authors.js");
+const bookRouter = require("./routes/books.js");
 
 app.set("view engine", "ejs");
 
@@ -32,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false, limit: "10mb" }));
 
 app.use("/", indexRouter);
 app.use("/authors", authorRouter);
+app.use("/books", bookRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server listening on port ${process.env.PORT || 3000}`);
